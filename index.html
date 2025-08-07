@@ -1,9 +1,10 @@
+<iframe srcdoc='
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BGM</title>
+  <title>Audio Player</title>
   <style>
     body, html {
       height: 100%;
@@ -29,13 +30,13 @@
   <script src="https://static.elfsight.com/platform/platform.js" defer></script>
 
   <script>
-    window.addEventListener('load', () => {
+    window.addEventListener("load", () => {
       setTimeout(() => {
-        const audio = document.querySelector('#player-container audio');
+        const audio = document.querySelector("#player-container audio");
         if (audio) {
-          audio.currentTime = 0;  // Start from beginning
+          audio.currentTime = 0;
           audio.play().catch(() => {
-            console.log('Autoplay prevented by browser');
+            console.log("Autoplay prevented by browser");
           });
         }
       }, 1000);
@@ -43,3 +44,4 @@
   </script>
 </body>
 </html>
+' width="320" height="100" style="border:none;" allow="autoplay"></iframe>
