@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Audio Player</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+    #player-container {
+      width: 300px;
+      height: auto;
+    }
+  </style>
+  <link href="https://core.service.elfsight.com/" rel="preconnect" crossorigin>
+  <link href="https://static.elfsight.com/" rel="preconnect" crossorigin>
+</head>
+<body>
+  <div id="player-container" class="elfsight-app-a17dd46f-fc47-44b1-99ce-67a3a3d3b364"></div>
+
+  <script src="https://static.elfsight.com/platform/platform.js" defer></script>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const audio = document.querySelector('#player-container audio');
+        if (audio) {
+          audio.currentTime = 0;  // Start from beginning
+          audio.play().catch(() => {
+            console.log('Autoplay prevented by browser');
+          });
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
