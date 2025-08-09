@@ -1,45 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BGM: Beautiful in White (Instrumental)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BGM: Wedding Entrance X Beautiful in White</title>
   <style>
-    body, html {
-      height: 100%;
+    body {
       margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       background: transparent;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: sans-serif;
-      overflow: hidden;
+      color: #555;
+      text-align: center;
     }
-    #player-container {
-      width: 300px;
-      height: auto;
+    #startBtn {
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      background: #ffffffaa;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+    #startBtn:hover {
+      background: #fff;
+    }
+    audio {
+      display: none;
     }
   </style>
-  <link href="https://core.service.elfsight.com/" rel="preconnect" crossorigin>
-  <link href="https://static.elfsight.com/" rel="preconnect" crossorigin>
 </head>
 <body>
-  <h1>BGM: Beautiful in White (Instrumental)</h1><
-  <div id="player-container" class="elfsight-app-a17dd46f-fc47-44b1-99ce-67a3a3d3b364"></div>
-
-  <script src="https://static.elfsight.com/platform/platform.js" defer></script>
+  <button id="startBtn"></button>
+  <audio id="bgm" loop>
+    <source src="https://raw.githubusercontent.com/dibszn/AZ-materials/main/Wedding%20Entrance%20X%20Beautiful%20In%20White.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        const audio = document.querySelector("#player-container audio");
-        if (audio) {
-          audio.currentTime = 0;
-          audio.play().catch(() => {
-            console.log("Autoplay prevented by browser");
-          });
-        }
-      }, 1000);
+    const audio = document.getElementById('bgm');
+    const startBtn = document.getElementById('startBtn');
+
+    startBtn.addEventListener('click', () => {
+      audio.volume = 0; // start silent
+      audio.play().then(() => {
+        startBtn.remove(); // remove button once playing starts
+        let vol = 0;
+        const fadeIn = setInterval(() => {
+          vol += 0.02;
+          if (vol >= 1) {
+            vol = 1;
+            clearInterval(fadeIn);
+          }
+          audio.volume = vol;
+        }, 100); // fade in over ~5 seconds
+      }).catch(err => {
+        console.error('Playback failed:', err);
+      });
     });
   </script>
 </body>
